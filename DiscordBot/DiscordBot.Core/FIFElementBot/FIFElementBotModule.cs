@@ -62,6 +62,13 @@
             await Reply(service.Help());
         }
 
+        [Command("social")]
+        [Summary("Get the list of social pages")]
+        public async Task SocialMedia()
+        {
+            await Reply(service.SocialMedia());
+        }
+
         private async Task Reply(string message, [CallerMemberName] string methodName = "")
         {
             await Reply(() => Task.FromResult(message), methodName);

@@ -3,5 +3,7 @@
     public interface IDiscordBotModuleService
     {
         string Help();
+
+        string SocialMedia();
     }
 }

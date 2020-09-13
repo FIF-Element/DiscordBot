@@ -62,6 +62,16 @@
             return builder.ToString();
         }
 
+        public string SocialMedia()
+        {
+            var builder = new StringBuilder();
+
+            builder.AppendLine("Vibe with a dood, visit our social media pages:");
+            builder.AppendLine($"\tInstagram: {configuration.GetAppSetting("Instagram")}");
+
+            return builder.ToString();
+        }
+
         private IEnumerable<CommandInfo> GetCommands()
         {
             List<CommandInfo> commands = commandService.GetCommands().ToList();
