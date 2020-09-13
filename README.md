@@ -9,8 +9,9 @@ Tag the bot and then pass a command to it
 ## Commands
 
 * Help
+* Social
 
 ## TODO
 
-- [ ] Add command for social media
+- [X] Add command for social media
 - [ ] Deploy to server
