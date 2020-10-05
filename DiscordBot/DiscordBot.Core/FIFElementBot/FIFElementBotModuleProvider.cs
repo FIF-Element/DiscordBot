@@ -8,26 +8,25 @@
     using Discord.Commands;
 
     using DiscordBot.Core.Attributes;
-    using DiscordBot.Core.Extensions;
     using DiscordBot.Core.Interfaces;
 
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
 
     public class FIFElementBotModuleProvider : IDiscordBotModuleService
     {
         private readonly ICommandService commandService;
 
-        private readonly IConfiguration configuration;
+        private readonly Config config;
 
         private readonly ILogger<FIFElementBotModuleProvider> logger;
 
-        public FIFElementBotModuleProvider(ILogger<FIFElementBotModuleProvider> logger, IConfiguration configuration,
-                                           ICommandService commandService)
+        public FIFElementBotModuleProvider(ILogger<FIFElementBotModuleProvider> logger, ICommandService commandService,
+                                           IOptions<Config> config)
         {
             this.logger = logger;
-            this.configuration = configuration;
             this.commandService = commandService;
+            this.config = config.Value;
         }
 
         public string Help()
@@ -39,7 +38,7 @@
             builder.AppendLine(
                 "Are you trying to use me? Tag me, tell me a command, and provide additional information when needed.");
             builder.AppendLine();
-            builder.Append($"Usage: @{configuration.GetAppSetting("BotName")} ");
+            builder.Append($"Usage: @{config.BotName} ");
             builder.AppendLine("{command} {data}");
             builder.AppendLine();
             builder.AppendLine("Commands -");
@@ -62,12 +61,21 @@
             return builder.ToString();
         }
 
+        public string Inspire()
+        {
+            string[] quotes = config.Quotes;
+
+            var random = new Random();
+
+            return quotes[random.Next(quotes.Length - 1)];
+        }
+
         public string SocialMedia()
         {
             var builder = new StringBuilder();
 
             builder.AppendLine("Vibe with a dood, visit our social media pages:");
-            builder.AppendLine($"\tInstagram: {configuration.GetAppSetting("Instagram")}");
+            builder.AppendLine($"\tInstagram: {config.Instagram}");
 
             return builder.ToString();
         }

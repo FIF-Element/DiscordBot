@@ -4,6 +4,8 @@
     {
         string Help();
 
+        string Inspire();
+
         string SocialMedia();
     }
 }

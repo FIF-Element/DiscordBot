@@ -8,16 +8,15 @@
     using Discord.Commands;
 
     using DiscordBot.Core.Attributes;
-    using DiscordBot.Core.Extensions;
     using DiscordBot.Core.FIFElementBot;
     using DiscordBot.Core.Interfaces;
 
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
 
     public class CommandProvider : ICommandService
     {
-        private readonly IConfiguration configuration;
+        private readonly Config config;
 
         private readonly CommandService innerService;
 
@@ -25,13 +24,13 @@
 
         private readonly IServiceProvider services;
 
-        public CommandProvider(ILogger<CommandProvider> logger, IServiceProvider services, IConfiguration configuration)
+        public CommandProvider(ILogger<CommandProvider> logger, IServiceProvider services, IOptions<Config> config)
         {
             innerService = new CommandService(new CommandServiceConfig());
 
             this.logger = logger;
             this.services = services;
-            this.configuration = configuration;
+            this.config = config.Value;
         }
 
         public Task AddModulesAsync()
@@ -104,15 +103,12 @@
 
         private string GetBotChannel()
         {
-            return configuration.GetAppSetting("BotChannel");
+            return config.BotChannel;
         }
 
         private bool IsDevelopmentEnvironment()
         {
-            string rawValue = configuration.GetAppSetting("DevMode");
-            logger.LogDebug("Attempting to parse DevMode configuration value: {value}", rawValue);
-            bool parsed = bool.TryParse(rawValue, out bool devMode);
-            return parsed && devMode;
+            return config.DevMode;
         }
     }
 }

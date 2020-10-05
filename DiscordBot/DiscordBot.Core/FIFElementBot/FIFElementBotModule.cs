@@ -53,6 +53,13 @@
             await Reply(service.Help());
         }
 
+        [Command("inspire")]
+        [Summary("Get inspired with a good vibe message")]
+        public async Task Inspire()
+        {
+            await Reply(service.Inspire());
+        }
+
         [Default]
         [Hidden]
         [Command("{default}")]

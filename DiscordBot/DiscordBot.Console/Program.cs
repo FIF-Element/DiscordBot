@@ -16,9 +16,11 @@
 
         private static IHostBuilder CreateHostBuilder(string[] args)
         {
-            return Host.CreateDefaultBuilder(args).UseWindowsService().ConfigureServices(services =>
+            return Host.CreateDefaultBuilder(args).UseWindowsService().ConfigureServices((context, services) =>
             {
                 services.AddLogging();
+
+                services.Configure<Config>(context.Configuration.GetSection("AppSettings"));
 
                 services.AddHostedService<Bot>();
 
