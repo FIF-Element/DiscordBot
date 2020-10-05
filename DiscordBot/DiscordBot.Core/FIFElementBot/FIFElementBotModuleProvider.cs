@@ -69,7 +69,7 @@
         {
             string[] quotes = config.Quotes;
 
-            return quotes[random.Next(quotes.Length - 1)];
+            return quotes[random.Next(quotes.Length)];
         }
 
         public string SocialMedia()
