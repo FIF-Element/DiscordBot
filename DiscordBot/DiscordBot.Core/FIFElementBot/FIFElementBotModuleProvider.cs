@@ -21,12 +21,16 @@
 
         private readonly ILogger<FIFElementBotModuleProvider> logger;
 
+        private readonly Random random;
+
         public FIFElementBotModuleProvider(ILogger<FIFElementBotModuleProvider> logger, ICommandService commandService,
                                            IOptions<Config> config)
         {
             this.logger = logger;
             this.commandService = commandService;
             this.config = config.Value;
+
+            random = new Random();
         }
 
         public string Help()
@@ -64,8 +68,6 @@
         public string Inspire()
         {
             string[] quotes = config.Quotes;
-
-            var random = new Random();
 
             return quotes[random.Next(quotes.Length - 1)];
         }
