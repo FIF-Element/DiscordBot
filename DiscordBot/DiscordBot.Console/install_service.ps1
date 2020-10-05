@@ -1,5 +1,5 @@
-$InstallPath = 'C:\DiscordBot'
-$BuildPath = 'C:\source\foldingcash\DiscordBot\DiscordBot\DiscordBot.Console\bin\Release\netcoreapp3.1'
+$InstallPath = 'C:\FIFElementDiscordBot'
+$BuildPath = 'C:\source\FIF-Element\DiscordBot\DiscordBot\DiscordBot.Console\bin\Release\netcoreapp3.1'
 
 'InstallPath: ' + $InstallPath
 'BuildPath: ' + $BuildPath
