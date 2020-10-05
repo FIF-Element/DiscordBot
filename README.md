@@ -10,8 +10,4 @@ Tag the bot and then pass a command to it
 
 * Help
 * Social
-
-## TODO
-
-- [X] Add command for social media
-- [ ] Deploy to server
+* Inspire
