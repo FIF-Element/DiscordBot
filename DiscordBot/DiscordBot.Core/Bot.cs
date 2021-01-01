@@ -58,9 +58,12 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            await client.StopAsync();
-            client.Dispose();
-            client = null;
+            if (client != null)
+            {
+                await client.StopAsync();
+                client.Dispose();
+                client = null;
+            }
         }
 
         private string GetToken()
